@@ -1,4 +1,7 @@
 using StampedeProtection.Api.Features;
+using StampedeProtection.Api.Shared.Application.Repositories;
+using StampedeProtection.Api.Shared.InfraStructure;
+using StampedeProtection.Api.Shared.InfraStructure.Repos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,9 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<GetProductRequestHandler>();
-builder.Services.AddSingleton<GetProductWithMemoryRequestHandler>();
-builder.Services.AddSingleton<GetProductWithHybridRequestHandler>();
+builder.Services.AddMemoryCache();
+builder.Services.AddHybridCache();
+builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddScoped<IProductRepository,ProductRepository>();
+builder.Services.AddScoped<GetProductRequestHandler>();
+builder.Services.AddScoped<GetProductWithMemoryRequestHandler>();
+builder.Services.AddScoped<GetProductWithHybridRequestHandler>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
