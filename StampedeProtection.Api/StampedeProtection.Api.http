@@ -1,0 +1,6 @@
+@StampedeProtection.Api_HostAddress = http://localhost:5191
+
+GET {{StampedeProtection.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
