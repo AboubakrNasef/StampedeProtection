@@ -13,6 +13,7 @@ namespace StampedeProtection.Api.Shared.InfraStructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=app.db");
+            optionsBuilder.EnableSensitiveDataLogging(false);
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -25,9 +26,8 @@ namespace StampedeProtection.Api.Shared.InfraStructure
                 new Product { Id = 4, Name = "Product 4", Price = 40.0m },
                 new Product { Id = 5, Name = "Product 5", Price = 50.0m }
             );
+
             base.OnModelCreating(modelBuilder);
-
         }
-
-    }   
+    }
 }
